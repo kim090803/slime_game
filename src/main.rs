@@ -4,6 +4,7 @@ use std::time::Duration;
 mod story;
 mod story_yes_1;
 mod story_no_1;
+mod story_yes_1_end;
 fn get_input() -> i32 {
     let mut input = String:: new();
     io::stdin().read_line(&mut input).expect("입력 실패");

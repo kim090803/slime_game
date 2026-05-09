@@ -1,5 +1,5 @@
 use crate::story::story;
-use crate::{Slime, get_input};
+use crate::{Slime, get_input, story_yes_1, story_yes_1_end};
 use std::thread;
 use std::time::Duration;
 
@@ -24,7 +24,7 @@ pub fn story_true_1(slime: &Slime)  {
     println!("슬라임: 이 성은 뭔데 왜이렇게 커?");
     println!("\n===============================");
     thread::sleep(Duration::from_secs(5));
-    println!("(성은 총 4층?으로 구성 되어있다.)");
+    println!("(성은 총 3층으로 구성 되어있다.)");
     println!("\n===============================");
     thread::sleep(Duration::from_secs(5));
     println!("슬라임 -> 속마음: 이쯤되면 제작자가 직접 해설 하는거 아니야?");
@@ -80,19 +80,19 @@ pub fn story_true_1(slime: &Slime)  {
 }
 pub fn story_battle(slime: &Slime) {
     story_true_1(slime);
-    let war = fight {
-    attack: 490, // 30
+    let mut war = fight {
+    attack: 30, // 30
     defencd: 30,
     heal: 30,
     };
-    let mut oke = 500;
+    let mut oke = 350;
     let mut slime_hp = status_2(slime);
     loop {
         println!("슬라임은 무엇을 할까요?");
         println!("===============================");
         println!("1. 기본 공격 | 2. 방어 | 3. 자가치유"); 
         let mut choice = get_input();
-        let mut defending = false;
+        let mut defence = false;
         match choice  {
             1 => {
                 println!("\n===============================");
@@ -110,11 +110,11 @@ pub fn story_battle(slime: &Slime) {
             }
             2 => {
                 println!("슬라임이 방어 태세를 취합니다.");
-                defending = true;
+                defence = true;
             }
             3 => {
                 println!("\n===============================");
-                if slime_hp.hp >= 100 {
+                if slime_hp.hp >= 200 {
                     println!("(체력을 회복할 수 없습니다.)");
                 println!("===============================");
                 thread::sleep(Duration::from_secs(2));
@@ -160,30 +160,41 @@ pub fn story_battle(slime: &Slime) {
             thread::sleep(Duration::from_secs(3));
             println!("슬라임의 스탯이 상승합니다.");
             slime_hp.hp = slime_hp.hp + 100;
-            println!("체력: {}",slime_hp.hp);
+            war.attack = war.attack + 20;
+            println!("체력: {} | 공격력: {} | 회복량: 50",slime_hp.hp, war.attack);
             thread::sleep(Duration::from_secs(2));
+            story_yes_1_end::end_1(slime, slime_hp.hp, war.attack);
             break;
         }
         println!("===============================");
         println!("오크: 받아라!!");
         thread::sleep(Duration::from_secs(3));
-        let oke_damage = if defending { 10 } else {30};
+        let oke_damage = if defence { 10 } else {30};
         slime_hp.hp = slime_hp.hp - oke_damage;
-        if defending {
+        if defence {
+            println!("===============================");
             println!("(슬라임은 방패로 피해를 최소화 하였습니다.) -{} 데미지", oke_damage);
+            thread::sleep(Duration::from_secs(3));
+            println!("슬라임: 안 아프지롱~ 다시 덤벼라!");
+            thread::sleep(Duration::from_secs(2));
         } else {
+            println!("===============================");
             println!("(오크의 강력한 공격을 맞았습니다.) -{} 데미지)", oke_damage);
+            thread::sleep(Duration::from_secs(3));
+            println!("슬라임: 초반 몹 밸런스 실화냐!? 방패 줬다며!");
+            thread::sleep(Duration::from_secs(2));
         }
         println!("현재 슬라임 체력: {}", slime_hp.hp);
         println!("\n===============================");
         if slime_hp.hp <= 0 {
+            println!("슬라임: 제작자 밸런스 패치 안 하냐...");
+            thread::sleep(Duration::from_secs(2));
             println!("슬라임이 쓰러졌습니다...게임 오버");
             break;
         }
         }
         }
     
-
 pub fn status_2 (slime: &Slime) -> slime_status  {
     let slime_infor = slime_status {
         hp: 200,
