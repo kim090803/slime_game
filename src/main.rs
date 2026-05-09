@@ -20,6 +20,22 @@ fn get_input_2() -> String {
     let input_2: String =  input_2.trim().to_string(); 
     input_2
 }
+
+fn input_y_n() -> bool {
+    println!("\n===============================");     // 전생을 한 플레이어의 경우, 스토리 스킵이 필요할 수 있습니다.
+    println!("\n스토리를 스킵하시겠습니까? (y/N)"); 
+    println!("\n===============================");
+    loop {
+        let input_yn = get_input_2().to_lowercase();
+
+        match input_yn.as_str() {
+            "yes" | "y" => return true,
+            "no" | "n" | "" => return false,
+            _ => println!("y 또는 n을 입력해주세요"),
+        }
+    }
+}
+
 struct Slime {
         hunger: i32,
         clean: i32,
@@ -29,24 +45,12 @@ struct Slime {
         
     }
     fn ending(slime: &mut Slime) -> bool  {
-        if slime.turn == 2 {
-            
-            println!("\n===============================");     // 전생을 한 플레이어의 경우, 스토리 스킵이 필요할 수 있습니다.
-            println!("\n스토리를 스킵하시겠습니까? (yes / no)"); 
-            println!("\n===============================");     
-            loop {
-                let input_2 = get_input_2();
-                if input_2 == "yes" {
-                    story::story(slime);
-                    return false;
-                } else if input_2 == "no" {
-                    println!("게임을 계속 진행합니다.");
-                    break;
-                } else {
-                    println!("잘못 입력하셨습니다.");
-                }
-            }
-            
+        if slime.turn != 2 {
+            return true;
+        }
+                 
+        if !input_y_n() {
+
             println!("\n===============================");
             println!("\n===============================");
             println!("대사가 나올땐 입력을 멈추고 감상 해주시기 바랍니다.");
@@ -117,11 +121,12 @@ struct Slime {
             println!("제작자: 그럼 이만...");
             println!("\n===============================");
             thread::sleep(Duration::from_secs(4));
-            story::story(slime);
-            return false;
         }
-        return true;
+
+        story::story(slime);
+        false
     }
+
 fn play_slime(slime: &Slime ) -> bool {
     if slime.hunger <= 0 {
         println!("(X _ x) 슬라임이 너무 배가 고파서 죽었습니다... 게임 오버");
@@ -145,7 +150,7 @@ fn play_slime(slime: &Slime ) -> bool {
 
 fn status(slime: &Slime) {
     println!("\n===============================");
-    println!("현재 포만감: {} | 현재 청결도: {} | 현재 행복도: {} | 생존: {}일차",slime.hunger, slime.clean, slime.happy,slime.turn);
+    println!("현재 포만감: {} | 현재 청결도: {} | 현재 행복도: {} | 생존: {}일차",slime.hunger, slime.clean, slime.happy, slime.turn);
     println!("무엇을 할까요?");
     println!("1. 밥 주기 (청결도 -2, 포만감 +4)");
     println!("2. 놀아 주기 (포만감 -2, 행복도 +3, 청결도 -2)");

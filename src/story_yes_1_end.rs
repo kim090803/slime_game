@@ -361,7 +361,8 @@ pub fn end_2(slime: &Slime, mut hp: i32, mut attack: i32) {
                     println!("슬라임: 어떠셨나요? 저의 마.지.막 쇼를 즐겨 주셔서 감사합니다.");
                     thread::sleep(Duration::from_secs(6));
                     std::process::exit(0);
-                }
+                },
+                _ => (), // 에러 때문에 임시로 처리해 두었음, 나중에 작성할 때 변경
             }
         }
 
