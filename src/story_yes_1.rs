@@ -2,7 +2,8 @@ use crate::story::story;
 use crate::{Slime, get_input, story_yes_1, story_yes_1_end};
 use std::thread;
 use std::time::Duration;
-
+use std::io;
+use std::fs;
 struct fight {
 attack: i32,
 defencd: i32,
@@ -14,74 +15,19 @@ struct slime_status {
 }
 
 pub fn story_true_1(slime: &Slime)  {
-    println!("\n===============================");
-    println!("(무사히 성에 도착하였습니다.)");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(4));
-    println!("슬라임: 나도 알아😡");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(4));
-    println!("슬라임: 이 성은 뭔데 왜이렇게 커?");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(5));
-    println!("(성은 총 3층으로 구성 되어있다.)");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(5));
-    println!("슬라임 -> 속마음: 이쯤되면 제작자가 직접 해설 하는거 아니야?");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(5));
-    println!("슬라임: 들어가자 일단");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(2));
-    println!("(끼익)");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(4));
-    println!("(성에 들어서니 커다란 오크가 있었다.)");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(5));
-    println!("슬라임: 나도 알아!!! 설마 때리는거 아니지?");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(5));
-    println!("오크: ???감히 마왕님에 성에 침입하다니... 용서 할 수 없다!");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(5));
-    println!("슬라임: 잠..잠깐 타임!");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(5));
-    println!("(그 순간 슬라임의 눈에 검과 방패가 보였다.)");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(5));
-    println!("(슬라임은 검과 방패를 획득하였다!)");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(4));
-    println!("슬라임: 그게 중요한게 아니잖아! 저거 쓰러뜨릴 순 있어?");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(5));
-    println!("슬라임: 에라 모르겠다 도망ㄱ..? (문이 굳게 닫혔다.)");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(5));
-    println!("제작자: 👍");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(5));
-    println!("슬라임: ^^ (난 행복해요)");
-    thread::sleep(Duration::from_secs(2));
-    println!("슬라임: 안 행복해!!!! 야!! 제작자!!!");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(4));
-    println!("슬라임: 하... 어쩔수 없나...쓰러뜨리는 수 밖에");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(4));
-    println!("슬라임: 덤벼!");
-    thread::sleep(Duration::from_secs(2));
-    println!("\n===============================");
-    println!("전투시작");
-    thread::sleep(Duration::from_secs(2));
-    println!("\n===============================");
+    let text = std::fs::read_to_string("story_yes_1.txt").expect("파일을 불러올 수 없습니다.");
+    let dialogs = text.split("---");
+
+    for dialog in dialogs {
+        println!("{}", dialog.trim());
+        let mut enter = String::new();
+        io::stdin().read_line(&mut enter).unwrap(); 
+    }
 }
 pub fn story_battle(slime: &Slime) {
     story_true_1(slime);
     let mut war = fight {
-    attack: 30, // 30
+    attack: 10000, // 실제: 30 (테스트를 위해 1000으로 설정)
     defencd: 30,
     heal: 30,
     };
@@ -91,7 +37,7 @@ pub fn story_battle(slime: &Slime) {
         println!("슬라임은 무엇을 할까요?");
         println!("===============================");
         println!("1. 기본 공격 | 2. 방어 | 3. 자가치유"); 
-        let mut choice = get_input();
+        let choice = get_input();
         let mut defence = false;
         match choice  {
             1 => {

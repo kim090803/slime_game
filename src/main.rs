@@ -29,8 +29,8 @@ fn input_y_n() -> bool {
         let input_yn = get_input_2().to_lowercase();
 
         match input_yn.as_str() {
-            "yes" | "y" => return true,
-            "no" | "n" | "" => return false,
+            "yes" | "y" | "" => return true, // 엔터키를 누를 시 스킵되게 변경
+            "no" | "n"  => return false,
             _ => println!("y 또는 n을 입력해주세요"),
         }
     }
@@ -48,7 +48,6 @@ struct Slime {
         if slime.turn != 2 {
             return true;
         }
-                 
         if !input_y_n() {
 
             println!("\n===============================");

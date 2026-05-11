@@ -1,89 +1,18 @@
 use std::thread;
 use std::time::Duration;
 use crate::{Slime, get_input};
+use std::fs;
+use std::io;
 
 
 
 pub fn end_1(slime: &Slime, mut hp: i32, mut attack: i32) {
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(3));
-    println!("슬라임: 하... 드디어 쓰러뜨렸네..");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(3));
-    println!("슬라임: 스탯이 상승 했다고 했지?");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(3));
-    println!("슬라임: 뭔가 세진거 같기도 하고...🤔");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(4));
-    println!("슬라임: 그보다... 저 오크놈이 여길 마왕님에 성 이라고 했단 말이지...");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(6));
-    println!("슬라임: 하필 ㅠㅠ 들어온 곳이 마왕성이네 진짜...");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(4));
-    println!("슬라임: 문도 닫혔는데 일단... 올라가 봐야지");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(3));
-    println!("(조금 앞으로 가보니 올라가는 계단이 있었다.)");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(4));
-    println!("슬라임: 올라가자 일단...");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(4));
-    println!("(마왕성 2층.)");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(3));
-    println!("???: 벌써 2층인가...역시 %@$##$");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(6));
-    println!("슬라임: 아오 힘들어... 엘리베이터 없어?");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(4));
-    println!("(주위를 두리번 거린다.)");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(3));
-    println!("슬라임: 2층은 아무도 없나?");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(3));
-    println!("???: 오크... 설치더니 결국 죽었군...");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(4));
-    println!("슬라임: 누구..?");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(3));
-    println!("???: 내 이름은...");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(4));
-    println!("크로우: 크로우다.");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(3));
-    println!("슬라임: 풉ㅋ 작명 센스 진짜...ㅋ");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(3));
-    println!("크로우: 이름이 슬라임 인것 보단 낫지?");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(4));
-    println!("슬라임: 제작자...💢");
-    thread::sleep(Duration::from_secs(3));
-    println!("슬라임: 됐고! 결투야 덤벼!!!");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(3));
-    println!("크로우: 역시..긴 말 필요 없다는건가");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(3));
-    println!("크로우: 역시... 넌 아직 이 세상의 진실을 몰라");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(5));
-    println!("크로우: 내가 직접 깨닫게 해주마.");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(3));
-    println!("슬라임: ?");
-    println!("\n===============================");
-    thread::sleep(Duration::from_secs(3));
-    println!("전투시작");
-    thread::sleep(Duration::from_secs(2));
-    println!("\n===============================");
+    let text = std::fs::read_to_string("story_yes_1.txt").expect("파일을 불러올 수 없습니다.");
+    let dialogs = text.split("---");
+
+    for dialog in dialogs {
+        println!("{}", dialog.trim());
+    }
     end_2(slime, hp, attack);
 }
 pub fn end_2(slime: &Slime, mut hp: i32, mut attack: i32) {
@@ -150,7 +79,7 @@ pub fn end_2(slime: &Slime, mut hp: i32, mut attack: i32) {
             println!("크로우: 으윽...");
             println!("===============================");
             thread::sleep(Duration::from_secs(2));
-            println!("오크: 아무것도 모르는...슬라임...같으..ㄴ");
+            println!("크로우: 아무것도 모르는...슬라임...같으..ㄴ");
             println!("===============================");
             thread::sleep(Duration::from_secs(3));
             println!("(크로우가 쓰러졌습니다.)");
@@ -161,7 +90,7 @@ pub fn end_2(slime: &Slime, mut hp: i32, mut attack: i32) {
             attack = attack + 50;
             println!("체력: {} | 공격력: {} | 회복량: 50",hp, attack);
             thread::sleep(Duration::from_secs(2));
-            end_2(slime,hp,attack);
+            end_3(slime,hp,attack);
             break;
         }
         println!("===============================");
@@ -193,7 +122,7 @@ pub fn end_2(slime: &Slime, mut hp: i32, mut attack: i32) {
             }
             
         }
-            fn end_3() {
+            fn end_3(slime: &Slime,hp: i32, attack: i32) {
             println!("슬라임: ...");
             println!("\n===============================");
             thread::sleep(Duration::from_secs(3));
