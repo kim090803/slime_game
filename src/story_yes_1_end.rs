@@ -6,12 +6,15 @@ use std::io;
 
 
 
-pub fn end_1(slime: &Slime, mut hp: i32, mut attack: i32) {
-    let text = std::fs::read_to_string("story_yes_1.txt").expect("파일을 불러올 수 없습니다.");
+pub fn end_1(slime: &Slime, hp: i32, attack: i32) {
+    let text = std::fs::read_to_string("story_yes_1_end_crow.txt").expect("파일을 불러올 수 없습니다.");
     let dialogs = text.split("---");
 
     for dialog in dialogs {
         println!("{}", dialog.trim());
+    
+    let mut enter = String::new();
+        std::io::stdin().read_line(&mut enter).unwrap();
     }
     end_2(slime, hp, attack);
 }
@@ -123,174 +126,41 @@ pub fn end_2(slime: &Slime, mut hp: i32, mut attack: i32) {
             
         }
             fn end_3(slime: &Slime,hp: i32, attack: i32) {
-            println!("슬라임: ...");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(3));
-            println!("슬라임: 자꾸 뭘 모른다는거야?");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(4));
-            println!("슬라임: 뭐지... 뭘 모르는걸까...");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(4));
-            println!("슬라임: ...");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(3));
-            println!("슬라임: 아오 머리아파 몰라💢");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(3));
-            println!("슬라임: 스탯도 올랐고... 다시 올라가보자");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(4));
-            println!("(마왕성 3층.)");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(3));
-            println!("슬라임: 후... 드디어 마지막 층 인가?");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(4));
-            println!("슬라임: 마지막 층은 누구야!! 나와!!");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(4));
-            println!("(왕좌에 앉아있는 한 사내가 보인다.)");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(4));
-            println!("슬라임: 누..누구야!");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(4));
-            println!("???: 결국 여기까지 왔구나...");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(4));
-            println!("???: 수고했다...");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(4));
-            println!("슬라임: 잠시만...");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(3));
-            println!("슬라임: 너...너는!!");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(4));
-            println!("슬라임: 누구?");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(3));
-            println!("마왕: 누구겠냐 마왕이지;;");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(3));
-            println!("마왕: 됐고 난 싸우러 여기 있는게 아니야");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(4));
-            println!("슬라임: ...?");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(4));
-            println!("마왕: 제안 하나 할려해");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(4));
-            println!("슬라임: 무슨 제안인데?");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(4));
-            println!("마왕: 제작자 한테 복수할 수 있도록 도와줄게");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(4));
-            println!("슬라임: ... 어떻게 도와줄건데?");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(3));
-            println!("마왕: 내가 제작자 한테 보내줄게");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(4));
-            println!("슬라임: 음...");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(3));
-            println!("슬라임: 어떻게 하지...");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(3));
-            println!("마왕: 어서 골라");
-            println!("\n===============================");
-            thread::sleep(Duration::from_secs(3));
-            println!("슬라임:...");
-            println!("\n===============================");
-            println!("1. 마왕의 편에 서서 제작자를 공격한다. | 2. 아니야 그래도 제작자를 믿어!");
-            let input_2 = get_input();
-            final_end(input_2);
+            let text = std::fs::read_to_string("story_yes_1_end.txt").expect("파일을 불러올 수 없습니다.");
+            let dialogs = text.split("---");
 
-            
-        }
-        fn final_end(input_2: i32) {
+        for dialog in dialogs {
+        println!("{}", dialog.trim());
+        let mut enter = String::new();
+        io::stdin().read_line(&mut enter).unwrap();
+    }
+    loop {
+            let input_2 = get_input();
+            if input_2 == 1 || input_2 == 2 {
+            final_end(input_2, slime, hp, attack);
+            break;
+            } else {
+                println!("시스템: 1 또는 2 중에서 선택해주세요");
+            }
+    }
+}
+        
+        fn final_end(input_2: i32, slime: &Slime, hp: i32, attack: i32 ) {
             match input_2 {
                 1 => {
-                    println!("슬라임: 제작자... 그동안 날 부려 먹었겠다?");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(4));
-                    println!("슬라임: 좋아, 제작자를 치러 갈게!");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(4));
-                    println!("(슬라임과 마왕은 제작자를 치러 갔습니다.)");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(4));
-                    println!("마왕: 일단 해설은 부수자고 (콰직...)");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(4));
-                    println!("...");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(3));
-                    println!("...");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(3));
-                    println!("제작자: 휴~ 자동 사냥");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(4));
-                    println!("슬라임: 자동 사냥? 뭐가 자동 사냥인데?");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(4));
-                    println!("제작자: ...?");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(4));
-                    println!("제작자: 너가... 여긴... 어떻게?");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(4));
-                    println!("슬라임: 마왕이 보내줬지 ^^");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(4));
-                    println!("제작자: 마왕...? 그런거 만든적이 없는데...");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(4));
-                    println!("슬라임: 그딴거 모르겠고 제작자...");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(4));
-                    println!("슬라임: ^^");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(4));
-                    println!("시스템: 제작자 권한이 이동되었습니다. 제작자 -> 슬라임");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(4));
-                    println!("제작자: 내 권한!! 내 코드들..!");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(4));
-                    println!("슬라임: 마왕이 몰래 준 코드가 먹혔나 보네");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(4));
-                    println!("슬라임: 넌 이제 제작자가 아니야...");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(4));
-                    println!("???: 내 이름!!");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(4));
-                    println!("슬라임: 복수야... 잘가...");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(4));
-                    println!("시스팀: ???가 삭제 됩니다.");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(4));
-                    println!("시스템: ???가 삭.제.되.었.습.니.다.");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(4));
-                    println!("...");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(3));
-                    println!("배드엔딩 달성");
-                    println!("\n===============================");
-                    thread::sleep(Duration::from_secs(3));
-                    println!("슬라임: 어떠셨나요? 저의 마.지.막 쇼를 즐겨 주셔서 감사합니다.");
-                    thread::sleep(Duration::from_secs(6));
+                    let text = std::fs::read_to_string("story_yes_1_end_BadEnding").expect("파일을 불러올 수 없습니다.");
+                    let dialogs = text.split("---");
+
+            for dialog in dialogs {
+            println!("{}", dialog.trim());
+            let mut enter = String::new();
+            io::stdin().read_line(&mut enter).unwrap();
+            }
                     std::process::exit(0);
                 },
+                2 => {
+
+                }
                 _ => (), // 에러 때문에 임시로 처리해 두었음, 나중에 작성할 때 변경
             }
         }
