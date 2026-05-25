@@ -26,7 +26,9 @@ pub fn story(slime: &Slime)  {
             break;
         }
     _ => {
-        println!("잘못 입력하셨습니다.");
+        println!("잘못 입력하셨습니다. yes OR no");
+        enter.clear(); 
+                std::io::stdin().read_line(&mut enter).unwrap();
     } 
     }
     }

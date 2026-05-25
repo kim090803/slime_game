@@ -32,6 +32,7 @@ fn input_y_n() -> bool {
             "yes" | "y" | "" => return true, // 엔터키를 누를 시 스킵되게 변경
             "no" | "n"  => return false,
             _ => println!("y 또는 n을 입력해주세요"),
+            
         }
     }
 }

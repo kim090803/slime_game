@@ -105,7 +105,7 @@ pub fn story_battle(slime: &Slime) {
             println!("===============================");
             thread::sleep(Duration::from_secs(3));
             println!("슬라임의 스탯이 상승합니다.");
-            slime_hp.hp = slime_hp.hp + 100;
+            slime_hp.hp = 300;
             war.attack = war.attack + 20;
             println!("체력: {} | 공격력: {} | 회복량: 50",slime_hp.hp, war.attack);
             thread::sleep(Duration::from_secs(2));
